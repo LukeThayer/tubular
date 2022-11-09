@@ -1,0 +1,50 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3osf66iybcvq"]
+
+[sub_resource type="GDScript" id="GDScript_6kdw8"]
+script/source = "extends Node
+
+@export_node_path var MoveDirectionNode_p
+var MoveDirectionNode : Node = null
+
+@export_node_path var JumpNode_p
+var JumpNode : Node = null
+
+func _ready():
+	load_nodes()
+	pass 
+
+
+func _physics_process(delta):
+	if Input.is_action_just_pressed(\"MOVE_LEFT\") || Input.is_action_just_pressed(\"MOVE_RIGHT\"):
+		var aput = Aputs
+		aput.direction.x = Input.get_action_strength(\"MOVE_RIGHT\") -Input.get_action_strength(\"MOVE_LEFT\")
+		MoveDirectionStart(aput)
+	
+	if Input.is_action_just_released(\"MOVE_LEFT\") || Input.is_action_just_released(\"MOVE_RIGHT\"):
+		var aput = Aputs
+		aput.direction.x = Input.get_action_strength(\"MOVE_RIGHT\") -Input.get_action_strength(\"MOVE_LEFT\")
+		MoveDirectionStart(aput)
+	pass
+
+func load_nodes():
+	MoveDirectionNode = self.get_node(MoveDirectionNode_p)
+	JumpNode = self.get_node(JumpNode_p)
+
+
+func MoveDirectionStart(aput: Aput):
+	MoveDirectionNode.start_action(aput)
+	pass
+
+func MoveDirectionEnd():
+	MoveDirectionNode.end_action()
+	pass
+
+func JumpStart(aput :Aput):
+	pass
+
+func JumpEnd(aput: Aput):
+	pass
+"
+
+[node name="player_b" type="Node"]
+script = SubResource("GDScript_6kdw8")
