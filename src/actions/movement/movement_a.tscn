@@ -3,21 +3,34 @@
 [sub_resource type="GDScript" id="GDScript_j84hw"]
 script/source = "extends Node
 @export_node_path var nodeToMove_p
+var nodeToMove: Node = null
 
+@export var speed:int = 1000
+@export var gravity:int = 3000
+@export var jumpheight:int = 800
 
+var CurrentDirection: Vector2 = Vector2(0,0)
+var CurrentVelocity: Vector2 = Vector2(0,0)
 func _ready():
-	load_nodes(nodeToMove_p)
+	nodeToMove = self.get_node(nodeToMove_p)
 	pass 
 
 
+func _physics_process(delta):
+	update_velocity(delta)
+	nodeToMove.move_and_slide()
+	pass
 
+func update_velocity(delta:float) -> Vector2:
+	var _velocity: Vector2
+	nodeToMove.velocity.x = CurrentDirection.x*speed
+	nodeToMove.velocity.y = nodeToMove.velocity.y + gravity*delta
+	return _velocity
+	pass
 
-
-func load_nodes(path : NodePath):
-	var nodeToMove: CharacterBody2D = self.get_node(path)
-	for n in self.get_children():
-		n.init(nodeToMove)
-	
+func apply_jump():
+	nodeToMove.velocity.y = jumpheight *-1
+	pass
 "
 
 [node name="movement_a" type="Node"]

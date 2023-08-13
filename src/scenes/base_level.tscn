@@ -1,8 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://d1bg4fv0xnkdj"]
+[gd_scene load_steps=4 format=3 uid="uid://d1bg4fv0xnkdj"]
 
 [ext_resource type="PackedScene" uid="uid://cstnybr87dd6p" path="res://src/actors/player.tscn" id="1_pf5sq"]
+[ext_resource type="Texture2D" uid="uid://dyt3kc1a2enob" path="res://icon.svg" id="2_xnmeo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3iuj5"]
 
 [node name="base_level" type="Node"]
 
 [node name="player" parent="." instance=ExtResource("1_pf5sq")]
 position = Vector2(-8, -3)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-2, 190)
+scale = Vector2(13.2654, 1.08977)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+scale = Vector2(6.22013, 6.18791)
+shape = SubResource("RectangleShape2D_3iuj5")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+modulate = Color(0.984314, 0.360784, 0.478431, 1)
+texture = ExtResource("2_xnmeo")

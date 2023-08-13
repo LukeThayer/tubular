@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cstnybr87dd6p"]
+[gd_scene load_steps=8 format=3 uid="uid://cstnybr87dd6p"]
 
 [ext_resource type="Texture2D" uid="uid://dyt3kc1a2enob" path="res://icon.svg" id="1_xrbww"]
 [ext_resource type="PackedScene" uid="uid://bsn117ayla6vg" path="res://src/actions/movement/movement_a.tscn" id="2_uxy8k"]
 [ext_resource type="PackedScene" uid="uid://d3osf66iybcvq" path="res://src/behaviors/player_b/player_b.tscn" id="3_hsp66"]
 [ext_resource type="PackedScene" uid="uid://cnquihc5ak6w4" path="res://src/actions/movement/move_a.tscn" id="3_sx71s"]
+[ext_resource type="PackedScene" uid="uid://cul2n1yxdu4ot" path="res://src/actions/movement/jump_a.tscn" id="4_o6sxl"]
+[ext_resource type="Script" path="res://src/actions/movement/jump_a.gd" id="5_wuqsy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_diqen"]
 
@@ -21,7 +23,14 @@ nodeToMove_p = NodePath("..")
 
 [node name="move_a" parent="movement_a" instance=ExtResource("3_sx71s")]
 
+[node name="jump_a" parent="movement_a" instance=ExtResource("4_o6sxl")]
+script = ExtResource("5_wuqsy")
+
 [node name="player_b" parent="." instance=ExtResource("3_hsp66")]
 MoveDirectionNode_p = NodePath("../movement_a/move_a")
+JumpNode_p = NodePath("../movement_a/jump_a")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
 
 [editable path="movement_a"]
